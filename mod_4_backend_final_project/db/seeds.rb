@@ -9,3 +9,7 @@
 5.times do |i|
   User.create(username: "Fuck Yeah #{i}")
 end
+
+5.times do |i|
+  Clip.create(url: "Heres a URL", title: "Title #{i}", artist: "Artist #{i}", user_id: Random.new.rand(0..4))
+end
