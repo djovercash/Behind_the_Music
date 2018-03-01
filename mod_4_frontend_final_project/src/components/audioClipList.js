@@ -6,7 +6,7 @@ const AudioClipList = (props) => {
   return (
     <div>
       {audioClips.map(clip => {
-        return <AudioItem key={clip.id} clip={clip} />
+        return <AudioItem key={clip.id} clip={clip} findAudioFile={props.findAudioFile}/>
       })}
     </div>
   )

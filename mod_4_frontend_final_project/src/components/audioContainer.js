@@ -23,11 +23,20 @@ class AudioContainer extends React.Component {
     })
   }
 
+  findAudioFile = (event) => {
+    let id = parseInt(event.target.id)
+    let file = this.state.clips.filter(clip => clip.id === id)
+    this.setState({
+      loaded_clip: file
+    })
+  }
+
   render() {
+    console.log(this.state.loaded_clip)
     return (
       <div id="audioContainer">
         <div id="userAudioClips">
-          <AudioClipList clips={this.state.clips}/>
+          <AudioClipList clips={this.state.clips} findAudioFile={this.findAudioFile}/>
         </div>
         <div id="playAudioClip">
           <h5>Play shit here</h5>

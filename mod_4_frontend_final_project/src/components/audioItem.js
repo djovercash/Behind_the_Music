@@ -2,7 +2,7 @@ import React from 'react'
 
 const AudioItem = (props) => {
   return (
-    <li>{props.clip.title}</li>
+    <li id={props.clip.id} onClick={props.findAudioFile}>{props.clip.title}</li>
   )
 }
 
