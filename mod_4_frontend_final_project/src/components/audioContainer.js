@@ -1,5 +1,6 @@
 import React from 'react'
 import AudioClipList from './audioClipList'
+import AudioClip from './audioClip'
 
 const BASEURL = 'http://localhost:3000/clips'
 
@@ -7,7 +8,12 @@ class AudioContainer extends React.Component {
 
   state = {
     clips: [],
-    loaded_clip: {}
+    loaded_clip: {
+      id: null,
+      url: '',
+      title: '',
+      artist: ''
+    }
   }
 
   fetchClips() {
@@ -27,12 +33,16 @@ class AudioContainer extends React.Component {
     let id = parseInt(event.target.id)
     let file = this.state.clips.filter(clip => clip.id === id)
     this.setState({
-      loaded_clip: file
+      loaded_clip: {
+        id: file[0].id,
+        url: file[0].url,
+        title: file[0].title,
+        artist: file[0].artist
+      }
     })
   }
 
   render() {
-    console.log(this.state.loaded_clip)
     return (
       <div id="audioContainer">
         <div id="userAudioClips">
@@ -40,7 +50,7 @@ class AudioContainer extends React.Component {
         </div>
         <div id="playAudioClip">
           <h5>Play shit here</h5>
-          <h5>Wave</h5>
+          <AudioClip clip={this.state.loaded_clip}/>
         </div>
         <div id="Analysis">
           <div className="specialAnalysis">
