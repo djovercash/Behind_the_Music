@@ -1,6 +1,8 @@
 import React from 'react'
 import AudioClipList from './audioClipList'
 import AudioClip from './audioClip'
+import AudioClipUpload from './audioClipUpload'
+import filestack from 'filestack-js';
 
 const BASEURL = 'http://localhost:3000/clips'
 
@@ -16,15 +18,11 @@ class AudioContainer extends React.Component {
     }
   }
 
-  fetchClips() {
-    return fetch(BASEURL).then(res => res.json())
-  }
-
   componentDidMount() {
-    this.fetchClips()
-    .then(data => {
+    let clips = this.props.clips
+    clips.map(clip => {
       this.setState({
-        clips: data
+        clips: [clip]
       })
     })
   }
@@ -42,9 +40,41 @@ class AudioContainer extends React.Component {
     })
   }
 
+  uploadClip = (event) => {
+    const client = filestack.init('AO1rF1TdISrSzbwTPEHFez')
+    client.pick({}).then(res => {
+      let files = res.filesUploaded
+      files.forEach(file => {
+        this.createBackendItem(file)
+        .then(clip => {
+          this.setState({
+            clips: [...this.state.clips, clip]
+          })
+        })
+      })
+    })
+  }
+
+  createBackendItem(file) {
+    return fetch(BASEURL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        url: file.url,
+        title: file.filename.split('.')[0],
+        user_id: 1
+      })
+    }).then(res => res.json())
+  }
+
   render() {
     return (
       <div id="audioContainer">
+        <div id="uploadAudioClip" >
+          <AudioClipUpload uploadClip={this.uploadClip}/>
+        </div>
         <div id="userAudioClips">
           <AudioClipList clips={this.state.clips} findAudioFile={this.findAudioFile}/>
         </div>

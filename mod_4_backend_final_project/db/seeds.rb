@@ -6,10 +6,5 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-5.times do |i|
-  User.create(username: "Fuck Yeah #{i}")
-end
-
-5.times do |i|
-  Clip.create(url: "Heres a URL", title: "Title #{i}", artist: "Artist #{i}", user_id: Random.new.rand(0..4))
-end
+User.create(username: "Drew", password: "123", password_confirmation: "123")
+User.create(username: "Mo", password: "123", password_confirmation: "123")
