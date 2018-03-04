@@ -3,6 +3,7 @@ import AudioClipList from './audioClipList'
 import AudioClip from './audioClip'
 import AudioClipUpload from './audioClipUpload'
 import filestack from 'filestack-js';
+import * as d3 from "d3";
 
 const BASEURL = 'http://localhost:3000/clips'
 
@@ -15,8 +16,94 @@ class AudioContainer extends React.Component {
       url: '',
       title: '',
       artist: ''
+    },
+    waveData: null,
+    line: null
+    // source: null
+  }
+
+
+
+
+
+
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  source = null
+
+  width = 940;
+  height = 230;
+  waveHeight = 200;
+  timeScale = d3.scaleLinear().range([0, this.width]);
+
+
+  loadClip = () => {
+    // this.setState({
+    //   source: this.audioCtx.createBufferSource()
+    // })
+    this.source = this.audioCtx.createBufferSource();
+
+    fetch(this.state.loaded_clip.url)
+    .then(function(response) { return response.arrayBuffer(); })
+    .then(buffer => decodeAndConnect(buffer));
+
+    let decodeAndConnect = (buffer) => {
+      this.audioCtx.decodeAudioData(buffer, (decodedData) => {
+        // console.log(decodedData);
+        this.createWaveform(decodedData);
+        this.source.buffer = decodedData;
+        this.source.connect(this.audioCtx.destination);
+      });
     }
   }
+
+  playClip = (event) => {
+    if (this.source) {this.source.stop()}
+    this.loadClip();
+    this.source.start(0);
+    // event.target.setAttribute('disabled', 'disabled');
+  }
+
+  stopClip = (event) => {
+    this.source.stop();
+    // event.target.removeAttribute('disabled')
+  }
+
+  //FIXME THIS:
+
+  createWaveform = (buffer) => {
+    console.log('original audioBuffer: ', buffer)
+    // beatData = buffer;
+    var waveData = buffer.getChannelData(0)
+    console.log('audioBuffer channel data: ', waveData)
+    var sampRateAdj = waveData.length > 1000000 ? 500 : 20
+    waveData = waveData.filter(function(d,i) {return i % sampRateAdj == 0})
+    console.log('reduced audioBuffer channel data: ', waveData)
+
+
+    this.timeScale.domain([0, buffer.duration]);
+
+    var line = d3.line()
+        .x((d, i) => {return i/waveData.length * this.width})
+        .y((d) => {return this.waveHeight/2 * d + this.waveHeight/2});
+
+    this.setState({
+      waveData: waveData,
+      line: line
+    })
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   componentDidMount() {
     let clips = this.props.clips
@@ -80,7 +167,7 @@ class AudioContainer extends React.Component {
         </div>
         <div id="playAudioClip">
           <h5>Play shit here</h5>
-          <AudioClip clip={this.state.loaded_clip}/>
+          <AudioClip {...this.state} clip={this.state.loaded_clip} playClip={this.playClip} stopClip={this.stopClip}/>
         </div>
         <div id="Analysis">
           <div className="specialAnalysis">
