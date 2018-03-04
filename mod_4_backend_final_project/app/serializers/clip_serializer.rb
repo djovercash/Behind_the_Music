@@ -1,3 +1,3 @@
 class ClipSerializer < ActiveModel::Serializer
-  attributes :id, :title, :url, :user
+  attributes :id, :title, :artist, :url, :handle, :user
 end

@@ -82,8 +82,8 @@ class App extends Component {
           logged_in: true,
           user_info: data
         })
-        localStorage.setItem("user_id": data.id)
       }
+      localStorage.setItem("user_id", data.id)
     })
   }
 
@@ -119,10 +119,12 @@ class App extends Component {
         <Router>
           <div className="LoggedIn">
             <NavBar Logout={this.LogOut} username={this.state.user_info.username}/>
+            <Switch>
               <Route path="/users/:id" render={(routerParams) => {
-                return <AudioContainer clips={this.state.user_info.clips} />
+                return <AudioContainer clips={this.state.user_info.clips} user={this.state.user_info.id}/>
               }}/>
               <Redirect from='/' to="/users/:id" />
+            </Switch>
           </div>
         </Router>
       )
