@@ -20,10 +20,8 @@ class AudioContainer extends React.Component {
 
   componentDidMount() {
     let clips = this.props.clips
-    clips.map(clip => {
-      this.setState({
-        clips: [clip]
-      })
+    this.setState({
+      clips: [...clips]
     })
   }
 

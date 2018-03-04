@@ -2,7 +2,7 @@ import React from 'react'
 
 const AudioClipUpload = (props) => {
   return (
-    <input type="BUTTON" value="Upload Audio Clip" id="uploadAudioClip" onClick={props.uploadClip}/>
+    <button onClick={props.uploadClip}>Upload Audio Clip</button>
   )
 }
 
