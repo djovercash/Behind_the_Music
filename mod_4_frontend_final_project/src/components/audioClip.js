@@ -1,18 +1,15 @@
 import React from 'react'
-import ReactDOM from 'react-dom';
-import Sound from 'react-sound';
+// import Sound from 'react-sound';
 import * as d3 from "d3";
 
 
 var width = 940;
 var height = 230;
-var waveHeight = 200;
+// var waveHeight = 200;
 
 
 class AudioClip extends React.Component {
 
-
-  //FIXME:
 
   componentDidMount() {
     // this.d3Node = d3.select(ReactDOM.findDOMNode(this))
@@ -34,7 +31,6 @@ class AudioClip extends React.Component {
   componentDidUpdate() {
     // this.newPath.datum(this.props.waveData).attr("d",this.props.line)
       // .call(updateNode);
-
     d3.select(this.refs.wavePath).datum(this.props.waveData).attr("d",this.props.line)
   }
   //
