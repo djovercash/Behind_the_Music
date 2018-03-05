@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import NavBar from './components/navbar'
-import AudioContainer from './components/audioContainer'
-import Login from './components/login'
+import NavBar from './appComponents/navbar'
+import AudioContainer from './appComponents/audioContainer'
+import Login from './appComponents/login'
+import Signup from './appComponents/signup'
 import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
 import './App.css';
-import NewUserForm from './components/newUserForm'
 
 const LOGINURL = 'http://localhost:3000/login'
 const USERSURL = 'http://localhost:3000/users'
@@ -137,7 +137,7 @@ class App extends Component {
                 return <Login handleLogin={this.LogIn}/>
               }}/>
               <Route path="/signup" render={(routerParams) => {
-                return <NewUserForm handleSignUp={this.createUser} />
+                return <Signup handleSignUp={this.createUser} />
               }}/>
             </Switch>
             <h3>{this.state.user_info.message === "User Not Found" ? "There was an error. Please reenter your username and password" : null}</h3>
