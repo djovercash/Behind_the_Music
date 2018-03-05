@@ -3,6 +3,7 @@ import AudioContainer from './audioContainer'
 import {BrowserRouter as Router, Route, Switch, NavLink} from 'react-router-dom';
 
 const AudioClipUpdate = (props) => {
+  console.log(props.clip)
   return (
     <Router>
       <div id="AudioClipUpdateForm">

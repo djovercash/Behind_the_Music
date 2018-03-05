@@ -1,7 +1,7 @@
 import React from 'react'
-import * as d3 from "d3";
+import * as d3 from 'd3'
 
-class SpectralAnalysis extends React.Component {
+class LoadedClipSpectral extends React.Component {
 
   width = 500
   height = 400
@@ -47,12 +47,12 @@ class SpectralAnalysis extends React.Component {
 
   render () {
     return (
-      <div ref="spectralAnalysis" id="spectralAnalysis">
-        {/* <span>SpectralAnalysis</span> */}
+      <div>
         <canvas ref="spectralCanvas" width={this.width} height={this.height} ></canvas>
       </div>
     )
   }
+
 }
 
-export default SpectralAnalysis
+export default LoadedClipSpectral

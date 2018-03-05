@@ -26,16 +26,12 @@ class AudioContainer extends React.Component {
     decodedData: null
   }
 
-  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   source = null
 
   width = 800;
   height = 200;
   waveHeight = 180;
   timeScale = d3.scaleLinear().range([0, this.width]);
-  analyser = this.audioCtx.createAnalyser();
-  dataArray = new Uint8Array(this.analyser.fftSize/2);
-
 
   loadClip = () => {
 
@@ -95,16 +91,20 @@ class AudioContainer extends React.Component {
     let clips = this.props.clips
     this.setState({
       clips: [...clips]
-    // clips.forEach(clip => {
-    //   this.setState({
-    //     clips: [clip]
-    //   })
     })
   }
+
+  componentWillUnmount() {
+  }
+
+
 
   findAudioFile = (event) => {
     let id = parseInt(event.target.id)
     let file = this.state.clips.filter(clip => clip.id === id)
+    this.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    this.analyser = this.audioCtx.createAnalyser();
+    this.dataArray = new Uint8Array(this.analyser.fftSize/2);
     this.setState({
       loaded_clip: {
         id: file[0].id,
@@ -134,7 +134,8 @@ class AudioContainer extends React.Component {
         .then(clip => {
           // console.log(clip)
           this.setState({
-            clips: [...this.state.clips, clip]
+            clips: [...this.state.clips, clip],
+            edit_song: false
           })
         })
       })
@@ -167,14 +168,17 @@ class AudioContainer extends React.Component {
 
   updateClip = (event) => {
     event.preventDefault()
+    console.log("In the update")
+    console.log(this.state.loaded_clip.title)
+    console.log(this.state.loaded_clip.artist)
     let title = this.state.loaded_clip.title
     let artist = this.state.loaded_clip.artist
     let nonEditedClips = this.state.clips.filter(clip => clip.id !== this.state.loaded_clip.id)
     this.fetchUpdateBackendItem(title, artist)
     .then(data => {
       this.setState({
-        clips:[...nonEditedClips, data],
-        edit_song: false
+        edit_song: false,
+        clips:[...nonEditedClips, data]
       })
     })
   }
@@ -255,6 +259,7 @@ class AudioContainer extends React.Component {
 
   audioToRender() {
     if (!this.state.edit_song) {
+      console.log("But now I'm here")
       return (
         <div id="audioContainer">
           {/* <div id="uploadAudioClip" > */}
@@ -275,7 +280,29 @@ class AudioContainer extends React.Component {
           {/* </div> */}
         </div>
       )
+    // } else if () {
+      // return (
+      //   <div id="audioContainer">
+      //     <div id="uploadAudioClip" >
+      //       <AudioClipUpload uploadClip={this.uploadClip}/>
+      //     </div>
+      //     <div id="userAudioClips">
+      //       <AudioClipList clips={this.state.clips} findAudioFile={this.findAudioFile}/>
+      //     </div>
+      //     <div id="playAudioClip">
+      //       <h5>Play shit here</h5>
+      //       <AudioClip {...this.state} editSongSelection={this.editSongSelection} clip={this.state.loaded_clip} playClip={this.playClip} stopClip={this.stopClip}/>
+      //     </div>
+      //     <div id="Analysis">
+      //       <div className="SpectralAnalysis">
+      //         <h5>Spatial Analysis</h5>
+      //             <SpectralAnalysis {...this.state} analyser={this.analyser} dataArray={this.dataArray} />
+      //       </div>
+      //     </div>
+      //   </div>
+      // )
     } else {
+      console.log("I bere")
       return (
         <AudioClipUpdate clip={this.state.loaded_clip} updateClip={this.updateClip} updateTitle={this.updateTitle} updateArtist={this.updateArtist} stopEdit={this.stopEdit} deleteClip={this.deleteClip}/>
       )
@@ -283,6 +310,7 @@ class AudioContainer extends React.Component {
   }
 
   render() {
+    console.log(this.state.edit_song)
     return (
       this.audioToRender()
     )
