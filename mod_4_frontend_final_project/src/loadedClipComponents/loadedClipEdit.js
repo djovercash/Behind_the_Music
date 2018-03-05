@@ -1,7 +1,6 @@
 import React from 'react'
 
 const LoadedClipEdit = (props) => {
-  console.log(props.clip)
   return (
     <div className="AudioClip">
       <form onSubmit={props.updateClip}>
@@ -11,9 +10,8 @@ const LoadedClipEdit = (props) => {
         <h3>Artist: </h3>
         <input type="text" name="artist" placeholder={props.clip.artist} onChange={props.updateArtist}/><br/ >
         <input type="submit" value="submit" />
+        <button onClick={props.deleteClip}>Delete Clip</button>
       </form>
-      // <button onClick={props.stopEdit}>Home</button>
-      <button onClick={props.deleteClip}>Delete Clip</button>
     </div>
   )
 }

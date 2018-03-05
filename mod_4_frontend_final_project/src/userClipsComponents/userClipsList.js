@@ -4,7 +4,7 @@ import UserClipItem from './userClipItem'
 const UserClipsList = (props) => {
   const audioClips = props.clips
   return (
-    <div>
+    <div id="audioClipList">
       {audioClips.map(clip => {
         return (
           <div key={clip.id}>
@@ -12,6 +12,7 @@ const UserClipsList = (props) => {
           </div>
         )
       })}
+      <button onClick={props.uploadClip}>Upload Audio Clip</button>
     </div>
   )
 }

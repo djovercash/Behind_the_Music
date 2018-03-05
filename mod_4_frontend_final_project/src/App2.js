@@ -130,7 +130,7 @@ class App extends Component {
     } else {
       return (
         <Router>
-          <div>
+          <div className="NotLoggedIn">
             <NavBar user={this.state.user_info}/>
             <Switch>
               <Route path="/login" render={(routerParams) => {

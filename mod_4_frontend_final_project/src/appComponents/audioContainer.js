@@ -1,6 +1,7 @@
 import React from 'react'
 import UserClipsList from '../userClipsComponents/userClipsList'
 import LoadedClipContainer from '../loadedClipComponents/loadedClipContainer'
+import filestack from 'filestack-js';
 
 const BASEURL = 'http://localhost:3000/clips'
 
@@ -39,9 +40,40 @@ class AudioContainer extends React.Component {
     })
   }
 
+  fetchCreateBackendItem(file) {
+    return fetch(BASEURL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        url: file.url,
+        title: file.filename.split('.')[0],
+        user_id: this.props.user,
+        handle: file.handle
+      })
+    }).then(res => res.json())
+  }
+
+    uploadClip = (event) => {
+      console.log("hello")
+      const client = filestack.init('AO1rF1TdISrSzbwTPEHFez')
+      client.pick({}).then(res => {
+        let files = res.filesUploaded
+        files.forEach(file => {
+          this.fetchCreateBackendItem(file)
+          .then(clip => {
+            this.setState({
+              clips: [...this.state.clips, clip],
+            })
+          })
+        })
+      })
+    }
+
+
   editSongSelection = (event) => {
     event.preventDefault()
-    console.log("here0")
     this.setState({
       edit_song: true
     })
@@ -94,6 +126,7 @@ class AudioContainer extends React.Component {
   }
 
   deleteClip = (event) => {
+    console.log("here")
     event.preventDefault()
     let nonDeletedClips = this.state.clips.filter(clip => clip.id !== this.state.loaded_clip.id)
     this.fetchDeleteClipBackend()
@@ -120,8 +153,8 @@ class AudioContainer extends React.Component {
 
   render() {
     return (
-      <div>
-        <UserClipsList clips={this.state.clips} findAudioFile={this.findAudioFile}/>
+      <div id="audioContainer">
+        <UserClipsList clips={this.state.clips} findAudioFile={this.findAudioFile} uploadClip={this.uploadClip}/>
         <LoadedClipContainer updateClip={this.updateClip} updateTitle={this.updateTitle} updateArtist={this.updateArtist} stopEdit={this.stopEdit} deleteClip={this.deleteClip} clip={this.state.loaded_clip} edit_song={this.state.edit_song} editSongSelection={this.editSongSelection}/>
       </div>
     )

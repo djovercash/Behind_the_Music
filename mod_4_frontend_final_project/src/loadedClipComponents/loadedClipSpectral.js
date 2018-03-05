@@ -47,7 +47,7 @@ class LoadedClipSpectral extends React.Component {
 
   render () {
     return (
-      <div>
+      <div id="spectralAnalysis">
         <canvas ref="spectralCanvas" width={this.width} height={this.height} ></canvas>
       </div>
     )
