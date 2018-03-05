@@ -3,7 +3,9 @@ import AudioClipList from './audioClipList'
 import AudioClip from './audioClip'
 import AudioClipUpload from './audioClipUpload'
 import AudioClipUpdate from './audioClipUpdate'
+import SpectralAnalysis from './spectralAnalysis'
 import filestack from 'filestack-js';
+import * as d3 from "d3";
 
 const BASEURL = 'http://localhost:3000/clips'
 
@@ -18,13 +20,79 @@ class AudioContainer extends React.Component {
       artist: '',
       handle: ''
     },
-    edit_song: false
+    edit_song: false,
+    waveData: null,
+    line: null
+  }
+
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  source = null
+
+  width = 940;
+  height = 230;
+  waveHeight = 200;
+  timeScale = d3.scaleLinear().range([0, this.width]);
+  analyser = this.audioCtx.createAnalyser();
+  dataArray = new Uint8Array(this.analyser.fftSize/2);
+
+
+  loadClip = () => {
+    this.source = this.audioCtx.createBufferSource();
+    this.source.connect(this.analyser);
+    this.analyser.connect(this.audioCtx.destination);
+
+    fetch(this.state.loaded_clip.url)
+    .then(function(response) { return response.arrayBuffer(); })
+    .then(buffer => decodeBuffer(buffer));
+
+    let decodeBuffer = (buffer) => {
+      this.audioCtx.decodeAudioData(buffer, (decodedData) => {
+        this.createWaveform(decodedData);
+        this.source.buffer = decodedData;
+      });
+    }
+  }
+
+  playClip = (event) => {
+    if (this.source) {this.source.stop()}
+    this.loadClip();
+    this.source.start(0);
+  }
+
+  stopClip = (event) => {
+    this.source.stop();
+  }
+
+
+  createWaveform = (buffer) => {
+    console.log('original audioBuffer: ', buffer)
+    var waveData = buffer.getChannelData(0)
+    console.log('audioBuffer channel data: ', waveData)
+    var sampRateAdj = waveData.length > 1000000 ? 500 : 20
+    waveData = waveData.filter(function(d,i) {return i % sampRateAdj === 0})
+    console.log('reduced audioBuffer channel data: ', waveData)
+
+
+    this.timeScale.domain([0, buffer.duration]);
+
+    var line = d3.line()
+        .x((d, i) => {return i/waveData.length * this.width})
+        .y((d) => {return this.waveHeight/2 * d + this.waveHeight/2});
+
+    this.setState({
+      waveData: waveData,
+      line: line
+    })
   }
 
   componentDidMount() {
     let clips = this.props.clips
     this.setState({
       clips: [...clips]
+    // clips.forEach(clip => {
+    //   this.setState({
+    //     clips: [clip]
+    //   })
     })
   }
 
@@ -158,6 +226,26 @@ class AudioContainer extends React.Component {
     })
   }
 
+  // render() {
+  //   return (
+  //     <div id="audioContainer">
+  //       <div id="uploadAudioClip" >
+  //         <AudioClipUpload uploadClip={this.uploadClip}/>
+  //       </div>
+  //       <div id="userAudioClips">
+  //         <AudioClipList clips={this.state.clips} findAudioFile={this.findAudioFile}/>
+  //       </div>
+  //       <div id="playAudioClip">
+  //         <h5>Play shit here</h5>
+  //         <AudioClip {...this.state} clip={this.state.loaded_clip} playClip={this.playClip} stopClip={this.stopClip}/>
+  //       </div>
+  //       <div id="Analysis">
+  //         <SpectralAnalysis {...this.state} analyser={this.analyser} dataArray={this.dataArray} />
+  //         <div className="specialAnalysis">
+  //           <h5>Spatial Analysis</h5>
+  //         </div>
+  //       </div>
+
   audioToRender() {
     if (!this.state.edit_song) {
       return (
@@ -170,14 +258,12 @@ class AudioContainer extends React.Component {
           </div>
           <div id="playAudioClip">
             <h5>Play shit here</h5>
-            <AudioClip editSongSelection={this.editSongSelection} clip={this.state.loaded_clip}/>
+            <AudioClip {...this.state} editSongSelection={this.editSongSelection} clip={this.state.loaded_clip} playClip={this.playClip} stopClip={this.stopClip}/>
           </div>
           <div id="Analysis">
-            <div className="specialAnalysis">
+            <div className="SpectralAnalysis">
               <h5>Spatial Analysis</h5>
-            </div>
-            <div className="specialAnalysis">
-              <h5>Spectral Analysis</h5>
+                  <SpectralAnalysis {...this.state} analyser={this.analyser} dataArray={this.dataArray} />
             </div>
           </div>
         </div>
