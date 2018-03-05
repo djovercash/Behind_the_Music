@@ -37,7 +37,7 @@ class AudioContainer extends React.Component {
         artist: file[0].artist,
         handle: file[0].handle
       }
-    })
+    }, () => this.refs.loadedClip.loadClip())
   }
 
   fetchCreateBackendItem(file) {
@@ -74,9 +74,12 @@ class AudioContainer extends React.Component {
 
   editSongSelection = (event) => {
     event.preventDefault()
-    this.setState({
-      edit_song: true
-    })
+    if (this.refs.loadedClip.source) {
+      this.refs.loadedClip.source.stop()
+      this.setState({
+        edit_song: true
+      })
+    }
   }
 
   updateTitle = (event) => {
@@ -155,7 +158,7 @@ class AudioContainer extends React.Component {
     return (
       <div id="audioContainer">
         <UserClipsList clips={this.state.clips} findAudioFile={this.findAudioFile} uploadClip={this.uploadClip}/>
-        <LoadedClipContainer updateClip={this.updateClip} updateTitle={this.updateTitle} updateArtist={this.updateArtist} stopEdit={this.stopEdit} deleteClip={this.deleteClip} clip={this.state.loaded_clip} edit_song={this.state.edit_song} editSongSelection={this.editSongSelection}/>
+        <LoadedClipContainer ref="loadedClip" updateClip={this.updateClip} updateTitle={this.updateTitle} updateArtist={this.updateArtist} stopEdit={this.stopEdit} deleteClip={this.deleteClip} clip={this.state.loaded_clip} edit_song={this.state.edit_song} editSongSelection={this.editSongSelection}/>
       </div>
     )
   }

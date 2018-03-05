@@ -8,7 +8,8 @@ class LoadedClipContainer extends React.Component {
 
   state = {
     waveData: null,
-    line: null
+    line: null,
+    decodedData: null
   }
 
   componentWillMount() {
@@ -24,10 +25,6 @@ class LoadedClipContainer extends React.Component {
   timeScale = d3.scaleLinear().range([0, this.width]);
 
   loadClip = () => {
-    this.source = this.audioCtx.createBufferSource();
-    this.source.connect(this.analyser);
-    this.analyser.connect(this.audioCtx.destination);
-
     fetch(this.props.clip.url)
     .then(function(response) { return response.arrayBuffer(); })
     .then(buffer => decodeBuffer(buffer));
@@ -35,14 +32,19 @@ class LoadedClipContainer extends React.Component {
     let decodeBuffer = (buffer) => {
       this.audioCtx.decodeAudioData(buffer, (decodedData) => {
         this.createWaveform(decodedData);
-        this.source.buffer = decodedData;
+        this.setState({
+          decodedData: decodedData
+        })
       });
     }
   }
 
   playClip = (event) => {
     if (this.source) {this.source.stop()}
-    this.loadClip();
+    this.source = this.audioCtx.createBufferSource();
+    this.source.connect(this.analyser);
+    this.analyser.connect(this.audioCtx.destination);
+    this.source.buffer = this.state.decodedData
     this.source.start(0);
   }
 
