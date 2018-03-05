@@ -31,13 +31,34 @@ a {
   color: rgb(0, 0, 0);
 }
 
+.LoggedIn {
+  display: grid;
+  justify-items: center;
+  grid-template-columns: 5% 90% 5%;
+  grid-template-rows: 100px;
+}
+
+.NotLoggedIn {
+  display: grid;
+  justify-items: center;
+  grid-template-columns: 5% 90% 5%;
+  grid-template-rows: 80px;
+}
+
 #audioNavBar {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  /* grid-area: 1 / 2 / 2 / 3; */
   display: flex;
-  margin: 10px 50px;
-  padding: 0px 50px;
+  /* margin: 10px 50px;
+  padding: 0px 50px; */
   justify-content: space-between;
   background-color: rgb(0, 0, 255);
   color: rgb(255, 255, 255);
+  width: 100%;
+  height: 100%;
 }
 
 #userLogin {
@@ -59,7 +80,82 @@ a {
   justify-content: space-around;
 }
 
+#audioContainer {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  width: 100%;
+  height: 100%;
 
+  display: grid;
+  justify-items: center;
+  grid-template-columns: 250px 800px;
+  grid-template-rows: 300px 400px;
+}
+
+#audioClipList {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+
+#uploadClipButton {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 2;
+  /* grid-row-end: 2; */
+}
+
+#audioClip {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+
+  width: 100%;
+  height: 100%;
+
+  display: grid;
+  justify-items: center;
+  grid-template-columns: 75% 25%;
+  grid-template-rows: 50px 50px 200px;
+}
+
+#clipName {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+
+#transport {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
+.audioClipUpdate {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
+#waveform {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 3;
+  grid-row-end: 4;
+}
+
+#spectralAnalysis {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }

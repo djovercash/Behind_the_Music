@@ -5,7 +5,7 @@ import {BrowserRouter as Router, Route, Switch, NavLink} from 'react-router-dom'
 const AudioClipUpdate = (props) => {
   return (
     <Router>
-      <div className="AudioClip">
+      <div id="AudioClipUpdateForm">
         <form onSubmit={props.updateClip}>
           <h2>Edit Your Clip Here</h2>
           <h3>Title: </h3>

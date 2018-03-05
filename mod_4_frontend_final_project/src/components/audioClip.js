@@ -127,8 +127,8 @@ import * as d3 from "d3";
 // var height = 230;
 // var waveHeight = 200;
 
-const width = 940;
-const height = 230;
+const width = 800;
+const height = 200;
 
 class AudioClip extends React.Component {
 
@@ -137,20 +137,22 @@ class AudioClip extends React.Component {
   }
 
   render () {
-    console.log(this.props)
+    // console.log(this.props)
     // if (this.props.loaded_clip.url !== '') {
       return (
         <Router>
-          <div className="AudioClip">
-            <span onClick={this.props.playClip}>▶</span><span onClick={this.props.stopClip}>◼</span>
-            <h3>{this.props.clip.title} | {this.props.clip.artist !== "" ? this.props.clip.artist : "Unknown"}</h3>
+          <div id="audioClip">
+            <h3 id='clipName'>{this.props.clip.title} | {this.props.clip.artist !== "" ? this.props.clip.artist : "Unknown"}</h3>
+            <div id='transport'>
+              <span onClick={this.props.playClip}>▶</span><span onClick={this.props.stopClip}>◼</span>
+            </div>
             <Switch>
                 <Route path="/tracks/:id" render={(routerParams) => {
                   return <AudioClipUpdate id={this.props.clip.id} onClick={this.props.editSongSelection}/>
                 }}/>
             </Switch>
-            <button id={this.props.clip.id} onClick={this.props.editSongSelection} value="Edit Song"><NavLink to="/tracks/:id" exact value="Edit Song">Edit Song</NavLink></button>
-            <svg width={width} height={height}>
+            <button id={this.props.clip.id} className="AudioClipUpdate" onClick={this.props.editSongSelection} value="Edit Song"><NavLink to="/tracks/:id" exact value="Edit Song">Edit Song</NavLink></button>
+            <svg width={width} height={height} id='waveform'>
               <g id="waveShape" ref="waveGroup">
                 <path
                   className="wave"

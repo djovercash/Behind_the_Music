@@ -4,7 +4,7 @@ import AudioItem from './audioItem'
 const AudioClipList = (props) => {
   const audioClips = props.clips
   return (
-    <div>
+    <div id='audioClipList'>
       {audioClips.map(clip => {
         return (
           <div key={clip.id}>

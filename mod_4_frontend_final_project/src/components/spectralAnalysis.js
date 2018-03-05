@@ -47,8 +47,8 @@ class SpectralAnalysis extends React.Component {
 
   render () {
     return (
-      <div ref="spectralAnalysis">
-        <span>SpectralAnalysis</span>
+      <div ref="spectralAnalysis" id="spectralAnalysis">
+        {/* <span>SpectralAnalysis</span> */}
         <canvas ref="spectralCanvas" width={this.width} height={this.height} ></canvas>
       </div>
     )
