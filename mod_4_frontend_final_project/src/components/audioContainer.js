@@ -3,7 +3,6 @@ import AudioClipList from './audioClipList'
 import AudioClip from './audioClip'
 import AudioClipUpload from './audioClipUpload'
 import AudioClipUpdate from './audioClipUpdate'
-import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
 import filestack from 'filestack-js';
 
 const BASEURL = 'http://localhost:3000/clips'
@@ -40,6 +39,13 @@ class AudioContainer extends React.Component {
         artist: file[0].artist,
         handle: file[0].handle
       }
+    })
+  }
+
+  stopEdit = (event) => {
+    console.log("Yo")
+    this.setState({
+      edit_song: false
     })
   }
 
@@ -179,7 +185,7 @@ class AudioContainer extends React.Component {
     } else {
       return (
         <div>
-          <AudioClipUpdate clip={this.state.loaded_clip} updateClip={this.updateClip} updateTitle={this.updateTitle} updateArtist={this.updateArtist} deleteClip={this.deleteClip}/>
+          <AudioClipUpdate clip={this.state.loaded_clip} updateClip={this.updateClip} updateTitle={this.updateTitle} updateArtist={this.updateArtist} stopEdit={this.stopEdit} deleteClip={this.deleteClip}/>
         </div>
       )
     }

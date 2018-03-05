@@ -95,19 +95,18 @@ class App extends Component {
     })
   }
 
-  fetchUsers() {
-    return fetch(USERSURL).then(res => res.json())
+  fetchUser(id) {
+    return fetch(`${USERSURL}/${id}`).then(res => res.json())
   }
 
 
   componentDidMount() {
     if (localStorage["user_id"]) {
       let id = parseInt(localStorage.user_id)
-      this.fetchUsers()
+      this.fetchUser(id)
       .then(data => {
-        let user = data.find(user => user.id === id)
         this.setState({
-          user_info: user
+          user_info: data
         })
       })
     }
@@ -118,12 +117,12 @@ class App extends Component {
       return (
         <Router>
           <div className="LoggedIn">
-            <NavBar Logout={this.LogOut} username={this.state.user_info.username}/>
+            <NavBar Home={this.Home} Logout={this.LogOut} user={this.state.user_info}/>
             <Switch>
-              <Route path="/users/:id" render={(routerParams) => {
+              <Route exact path="/users/:id" render={(routerParams) => {
                 return <AudioContainer clips={this.state.user_info.clips} user={this.state.user_info.id}/>
               }}/>
-              <Redirect from='/' to="/users/:id" />
+              <Redirect from='/' to='/users/:id' />
             </Switch>
           </div>
         </Router>
@@ -132,7 +131,7 @@ class App extends Component {
       return (
         <Router>
           <div>
-            <NavBar username={this.state.user_info.username}/>
+            <NavBar user={this.state.user_info}/>
             <Switch>
               <Route path="/login" render={(routerParams) => {
                 return <Login handleLogin={this.LogIn}/>

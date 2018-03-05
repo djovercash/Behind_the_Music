@@ -1,11 +1,22 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom';
 
+const setTimeOfDay = (time) => {
+  if (time < 12) {
+    return "Morning"
+  } else if (time >= 18) {
+    return "Evening"
+  } else {
+    return "Afternoon"
+  }
+}
+
 const userExists = (props) => {
-  if (props.username) {
+  const time = new Date().getHours()
+  if (props.user.username) {
     return (
       <div id="userLogin">
-        <h5>Welcome Back, {props.username}</h5>
+        <h5 onClick={props.Home}><NavLink to="/users/:id" exact>Good {setTimeOfDay(time)}, {props.user.username}</NavLink></h5>
         <h5>|</h5>
         <h5 onClick={props.Logout}><NavLink to='/login' exact>Log out</NavLink></h5>
       </div>

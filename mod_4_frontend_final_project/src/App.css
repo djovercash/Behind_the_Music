@@ -27,6 +27,10 @@ a {
   color: rgb(255, 255, 255)
 }
 
+.AudioClip a {
+  color: rgb(0, 0, 0);
+}
+
 #audioNavBar {
   display: flex;
   margin: 10px 50px;
