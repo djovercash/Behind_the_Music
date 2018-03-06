@@ -19,9 +19,9 @@ class LoadedClipContainer extends React.Component {
   }
 
   source = null
-  width = 940;
-  height = 230;
-  waveHeight = 200;
+  width = 800;
+  height = 200;
+  waveHeight = 180;
   timeScale = d3.scaleLinear().range([0, this.width]);
 
   loadClip = () => {
@@ -73,14 +73,14 @@ class LoadedClipContainer extends React.Component {
   whatToRender() {
     if (!this.props.edit_song) {
       return (
-        <div id="LoadedClipContainer">
+        <div id="loadedClipContainer">
           <LoadedClipWave {...this.state} clip={this.props.clip} playClip={this.playClip} stopClip={this.stopClip} editSongSelection={this.props.editSongSelection}/>
           <LoadedClipSpectral {...this.state} clip={this.props.clip} analyser={this.analyser} dataArray={this.dataArray}/>
         </div>
       )
     } else {
       return (
-        <div id="LoadedClipContainer">
+        <div id="loadedClipContainer">
           <LoadedClipEdit clip={this.props.clip} updateClip={this.props.updateClip} updateTitle={this.props.updateTitle} updateArtist={this.props.updateArtist} deleteClip={this.props.deleteClip}/>
         </div>
       )

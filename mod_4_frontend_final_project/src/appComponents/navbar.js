@@ -38,7 +38,7 @@ const userExists = (props) => {
 
 const NavBar = (props) => {
   return (
-    <div id="audioNavBar">
+    <div id="navBar">
       <div id="logoTitle">
         <h5>Here is our logo and title</h5>
       </div>
