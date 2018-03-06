@@ -11,7 +11,7 @@ class LoadedClipSpectral extends React.Component {
 
   y = d3.scaleLinear()
     .domain([0, 255])
-    .range([this.height - 5, 5]);
+    .range([this.height + 4, 5]);
 
   colors = d3.scaleLinear()
     .domain([0, 35, 100, 200])
@@ -20,7 +20,7 @@ class LoadedClipSpectral extends React.Component {
   componentDidMount() {
     this.canvas = this.refs.spectralCanvas
     this.canvasCtx = this.canvas.getContext("2d");
-    this.canvasCtx.fillStyle = 'rgb(255, 255, 255)';
+    this.canvasCtx.fillStyle = 'rgb(33, 33, 33)';
     this.canvasCtx.strokeStyle = 'rgb(0, 0, 0)';
     this.canvasCtx.lineWidth = .1;
     this.draw()
@@ -32,7 +32,7 @@ class LoadedClipSpectral extends React.Component {
 
   draw = () => {
     this.props.analyser.getByteFrequencyData(this.props.dataArray)
-    this.canvasCtx.fillStyle = 'rgba(255, 255, 255, .2)';
+    this.canvasCtx.fillStyle = 'rgb(33, 33, 33)';
     this.canvasCtx.fillRect(0, 0, this.width, this.height);
     for (let i in this.props.dataArray) {
       this.canvasCtx.beginPath();
@@ -46,9 +46,8 @@ class LoadedClipSpectral extends React.Component {
 
   render () {
     return (
-      <div id="spectralAnalysis">
-        <canvas ref="spectralCanvas" width={this.width} height={this.height} ></canvas>
-      </div>
+
+        <canvas ref="spectralCanvas" id="spectralCanvas" width={this.width} height={this.height} ></canvas>
     )
   }
 }

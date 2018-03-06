@@ -183,13 +183,13 @@ a {
   margin-bottom: 10px;
 }
 
-#spectralAnalysis {
+#spectralCanvas {
   grid-column-start: 1;
   grid-column-end: 3;
   grid-row-start: 2;
   /* grid-row-end: 3; */
 
-  border: 2px solid black;
+  border: 1px solid black;
   /* box-shadow: 4px 4px 0px 0px black; */
 }
 
@@ -215,7 +215,8 @@ a {
 }
 
 #waveform {
-  border: 2px solid rgb(0, 0, 0)
+  border: 1px solid rgb(0, 0, 0);
+  background-color: rgb(33, 33, 33);
 }
 
 #demoWave {
