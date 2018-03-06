@@ -27,6 +27,9 @@ class AudioContainer extends React.Component {
   }
 
   findAudioFile = (event) => {
+    if (this.refs.loadedClip.source) {
+      this.refs.loadedClip.source.stop()
+    }
     let id = parseInt(event.target.id)
     let file = this.state.clips.filter(clip => clip.id === id)
     this.setState({
