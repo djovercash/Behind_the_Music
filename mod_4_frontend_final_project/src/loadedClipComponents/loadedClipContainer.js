@@ -55,7 +55,7 @@ class LoadedClipContainer extends React.Component {
 
   createWaveform = (buffer) => {
     var waveData = buffer.getChannelData(0)
-    var sampRateAdj = waveData.length > 1000000 ? 500 : 20
+    var sampRateAdj = waveData.length > 1000000 ? 1000 : 60
     waveData = waveData.filter(function(d,i) {return i % sampRateAdj === 0})
 
     this.timeScale.domain([0, buffer.duration]);

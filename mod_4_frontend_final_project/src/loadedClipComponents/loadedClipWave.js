@@ -3,6 +3,15 @@ import * as d3 from 'd3'
 
 class LoadedClipWave extends React.Component {
 
+  pathStyle = {
+    'stroke': 'orange',
+    'fillOpacity': '0',
+  };
+
+  // groupStyle = {
+  //   'margin-top': '-50px'
+  // }
+
   componentDidMount() {
     d3.select(this.refs.wavePath).datum(this.props.waveData).attr("d",this.props.line)
   }
@@ -38,7 +47,8 @@ class LoadedClipWave extends React.Component {
               <g id="waveShape" ref="waveGroup">
                 <path
                   className="wave"
-                  transform="translate(0,30)"
+                  transform="translate(0,10)"
+                  style={this.pathStyle}
                   ref="wavePath"
                 />
               </g>
