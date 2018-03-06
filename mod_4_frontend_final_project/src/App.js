@@ -13,7 +13,7 @@ class App extends Component {
 
   state = {
     logged_in: false,
-    user_info: {}
+    user: {}
   }
 
   fetchLoginUser(username, password) {
@@ -39,11 +39,11 @@ class App extends Component {
       if (data.message === "User Not Found") {
         this.setState({
           logged_in: false,
-          user_info: data
+          user: data
         })
       } else {
         this.setState({
-          user_info: data,
+          user: data,
           logged_in: true
         })
         localStorage.setItem("user_id", data.id)
@@ -75,12 +75,12 @@ class App extends Component {
       if(data.message === "Invalid Information. Please try again") {
         this.setState({
           logged_in: false,
-          user_info: data
+          user: data
         })
       } else {
         this.setState({
           logged_in: true,
-          user_info: data
+          user: data
         })
       }
       localStorage.setItem("user_id", data.id)
@@ -91,7 +91,7 @@ class App extends Component {
     localStorage.clear()
     this.setState({
       logged_in: false,
-      user_info: {}
+      user: {}
     })
   }
 
@@ -106,45 +106,42 @@ class App extends Component {
       this.fetchUser(id)
       .then(data => {
         this.setState({
-          user_info: data
+          user: data
         })
       })
     }
   }
 
   whatToRender() {
-    if (this.state.user_info.username) {
+    if (this.state.user.username) {
       return (
-        <Router>
-          <div className="LoggedIn">
-            <NavBar Home={this.Home} Logout={this.LogOut} user={this.state.user_info}/>
-            <Switch>
-              <Route exact path="/users/:id" render={(routerParams) => {
-                return <AudioContainer clips={this.state.user_info.clips} user={this.state.user_info.id}/>
-              }}/>
-              <Redirect from='/' to='/users/:id' />
-            </Switch>
-          </div>
-        </Router>
+        <div className="LoggedIn">
+          <NavBar Home={this.Home} Logout={this.LogOut} user={this.state.user}/>
+          <Switch>
+            <Route path="/users/:id" render={(routerParams) => {
+              console.log(routerParams.match.params.id)
+              return <AudioContainer clips={this.state.user.clips} user={this.state.user.id}/>
+            }}/>
+            <Redirect from="/" to="/users/:id" />
+          </Switch>
+        </div>
       )
     } else {
       return (
-        <Router>
-          <div className="NotLoggedIn">
-            <NavBar user={this.state.user_info}/>
-            <Switch>
-              <Route path="/login" render={(routerParams) => {
-                return <Login handleLogin={this.LogIn}/>
-              }}/>
-              <Route path="/signup" render={(routerParams) => {
-                return <Signup handleSignUp={this.createUser} />
-              }}/>
-              <Redirect from='/' to='/login' />
-            </Switch>
-            <h3>{this.state.user_info.message === "User Not Found" ? "There was an error. Please reenter your username and password" : null}</h3>
-            <h3>{this.state.user_info.message === "Invalid Information. Please try again" ? "There was an error. Please reender desired username and password" : null}</h3>
-          </div>
-        </Router>
+        <div className="NotLoggedIn">
+          <NavBar user={this.state.user}/>
+          <Switch>
+            <Route path="/login" render={(routerParams) => {
+              return <Login handleLogin={this.LogIn}/>
+            }}/>
+            <Route path="/signup" render={(routerParams) => {
+              return <Signup handleSignUp={this.createUser} />
+            }}/>
+            <Redirect from="/" to="/login" />
+          </Switch>
+          <h3>{this.state.user.message === "User Not Found" ? "There was an error. Please reenter your username and password" : null}</h3>
+          <h3>{this.state.user.message === "Invalid Information. Please try again" ? "There was an error. Please reender desired username and password" : null}</h3>
+        </div>
       )
     }
   }

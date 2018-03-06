@@ -11,8 +11,8 @@ class LoadedClipSpectral extends React.Component {
     .range([50, this.width - 55]);
 
   y = d3.scaleLinear()
-    .domain([0, 290])
-    .range([this.height - 0, 0]);
+    .domain([0, 300])
+    .range([this.height, 0]);
 
   colors = d3.scaleLinear()
     .domain([0, 50])
@@ -46,6 +46,7 @@ class LoadedClipSpectral extends React.Component {
   }
 
   render () {
+    console.log(this.props.dataArray)
     return (
       <div id="spectralAnalysis">
         <canvas ref="spectralCanvas" width={this.width} height={this.height} ></canvas>
