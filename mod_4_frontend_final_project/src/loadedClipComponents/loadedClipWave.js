@@ -3,6 +3,10 @@ import * as d3 from 'd3'
 
 class LoadedClipWave extends React.Component {
 
+  componentDidMount() {
+    d3.select(this.refs.wavePath).datum(this.props.waveData).attr("d",this.props.line)
+  }
+
   componentDidUpdate() {
     d3.select(this.refs.wavePath).datum(this.props.waveData).attr("d",this.props.line)
   }
@@ -10,11 +14,14 @@ class LoadedClipWave extends React.Component {
   whatToRender() {
     if (this.props.clip.title === '') {
       return (
-        <h3>Select a Clip</h3>
+        <div className="loadedClipWave" id="clipNotLoaded">
+          <h3>Select a Clip</h3>
+          <button> ▶ </button><button> ◼ </button>
+        </div>
       )
     } else {
       return (
-        <div id="loadedClipWave">
+        <div className="loadedClipWave">
           <h3>{this.props.clip.title} | {this.props.clip.artist !== "" ? this.props.clip.artist : "Unknown"}</h3>
           <button onClick={this.props.playClip}> ▶ </button><button onClick={this.props.stopClip}> ◼ </button>
           <button onClick={this.props.editSongSelection}>Edit Song</button>
@@ -33,6 +40,8 @@ class LoadedClipWave extends React.Component {
   }
 
   render () {
+    console.log(this.refs.wavePath)
+    console.log(this.props.waveData)
     return (
       this.whatToRender()
     )

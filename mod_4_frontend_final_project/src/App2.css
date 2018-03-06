@@ -1,0 +1,21 @@
+.App {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: 10% 40% 40% 10%;
+  grid-template-rows: 10% 80% 10%;
+}
+
+#navBar {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  background-color: red;
+}
+
+#audioContainer {
+  background-color: blue;
+}
+
+.form {
+  background-color: blue;
+}

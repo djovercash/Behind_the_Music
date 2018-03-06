@@ -56,7 +56,6 @@ class AudioContainer extends React.Component {
   }
 
     uploadClip = (event) => {
-      console.log("hello")
       const client = filestack.init('AO1rF1TdISrSzbwTPEHFez')
       client.pick({}).then(res => {
         let files = res.filesUploaded
@@ -76,10 +75,10 @@ class AudioContainer extends React.Component {
     event.preventDefault()
     if (this.refs.loadedClip.source) {
       this.refs.loadedClip.source.stop()
-      this.setState({
-        edit_song: true
-      })
     }
+    this.setState({
+        edit_song: true
+    })
   }
 
   updateTitle = (event) => {
@@ -129,7 +128,6 @@ class AudioContainer extends React.Component {
   }
 
   deleteClip = (event) => {
-    console.log("here")
     event.preventDefault()
     let nonDeletedClips = this.state.clips.filter(clip => clip.id !== this.state.loaded_clip.id)
     this.fetchDeleteClipBackend()

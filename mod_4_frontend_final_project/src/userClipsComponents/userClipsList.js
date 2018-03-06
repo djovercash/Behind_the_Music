@@ -5,6 +5,7 @@ const UserClipsList = (props) => {
   const audioClips = props.clips
   return (
     <div id="userClipsList">
+      <h3>Your Current Clips</h3>
       {audioClips.map(clip => {
         return (
           <div key={clip.id}>
