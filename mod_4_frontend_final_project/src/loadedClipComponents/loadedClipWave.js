@@ -16,7 +16,7 @@ class LoadedClipWave extends React.Component {
       return (
         <div id="loadedClipWave">
           <h3>{this.props.clip.title} | {this.props.clip.artist !== "" ? this.props.clip.artist : "Unknown"}</h3>
-          <span onClick={this.props.playClip}> ▶ </span><span onClick={this.props.stopClip}> ◼ </span>
+          <button onClick={this.props.playClip}> ▶ </button><button onClick={this.props.stopClip}> ◼ </button>
           <button onClick={this.props.editSongSelection}>Edit Song</button>
             <svg width="800" height="200">
               <g id="waveShape" ref="waveGroup">

@@ -34,15 +34,17 @@ a {
 .LoggedIn {
   display: grid;
   justify-items: center;
-  grid-template-columns: 5% 90% 5%;
+  grid-template-columns: auto 1100px auto;
   grid-template-rows: 100px;
+  grid-gap: 20px 20px;
 }
 
 .NotLoggedIn {
   display: grid;
   justify-items: center;
-  grid-template-columns: 5% 90% 5%;
+  grid-template-columns: auto 1100px auto;
   grid-template-rows: 80px;
+  grid-gap: 20px 20px;
 }
 
 #navBar {
@@ -94,6 +96,8 @@ a {
   justify-content: center;
   grid-template-columns: 200px 800px;
   grid-template-rows: 300px auto;
+  grid-gap: 20px 20px;
+
 }
 
 #userClipsList {
@@ -132,6 +136,8 @@ a {
   justify-items: center;
   grid-template-columns: 50% 50%;
   grid-template-rows: 300px 400px auto;
+  grid-gap: 20px 0px;
+
 
   border: 2px solid black;
   box-shadow: 4px 4px 1px 0px black;
@@ -142,6 +148,9 @@ a {
   grid-column-end: 3;
   grid-row-start: 1;
   grid-row-end: 2;
+
+  width: 100%;
+  height: 100%;
 
   border: 2px solid black;
   /* box-shadow: 4px 4px 0px 0px black; */
