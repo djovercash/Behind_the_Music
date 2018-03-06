@@ -16,21 +16,21 @@ const userExists = (props) => {
   if (props.user.username) {
     return (
       <div id="userLogin">
-        <h5 onClick={props.Home}><NavLink to="/users/:id" exact>Good {setTimeOfDay(time)}, {props.user.username}</NavLink></h5>
-        <h5>|</h5>
-        <h5 onClick={props.Logout}><NavLink to='/login' exact>Logout</NavLink></h5>
+        <h3 onClick={props.Home}><NavLink to="/users/:id" exact>Good {setTimeOfDay(time)}, {props.user.username}</NavLink></h3>
+        <h3>|</h3>
+        <h3 onClick={props.Logout}><NavLink to='/login' exact>Logout</NavLink></h3>
       </div>
     )
   } else if (window.location.pathname === "/login") {
     return (
       <div id="userLogin">
-        <h5><NavLink to='/signup' exact>Sign Up</NavLink></h5>
+        <h3><NavLink to='/signup' exact>Sign Up</NavLink></h3>
       </div>
     )
   } else {
     return (
       <div id="userLogin">
-        <h5><NavLink to='/login' exact>Login</NavLink></h5>
+        <h3><NavLink to='/login' exact>Login</NavLink></h3>
       </div>
     )
   }
@@ -40,7 +40,7 @@ const NavBar = (props) => {
   return (
     <div id="navBar">
       <div id="logoTitle">
-        <h5>Here is our logo and title</h5>
+        <img src='../orangeLogo.png' alt="Behind the Music"/>
       </div>
       <div>
         {userExists(props)}
