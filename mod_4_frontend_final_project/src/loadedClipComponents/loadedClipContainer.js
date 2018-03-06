@@ -19,7 +19,7 @@ class LoadedClipContainer extends React.Component {
   }
 
   source = null
-  width = 800;
+  width = 760;
   height = 200;
   waveHeight = 180;
   timeScale = d3.scaleLinear().range([0, this.width]);

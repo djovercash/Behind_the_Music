@@ -17,6 +17,15 @@ class LoadedClipWave extends React.Component {
         <div className="loadedClipWave" id="clipNotLoaded">
           <h3>Select a Clip</h3>
           <button> ▶ </button><button> ◼ </button>
+          <svg width="760" height="200" id="demoWave" >
+            <g ref="waveGroup">
+              <path
+                className="wave"
+                transform="translate(0,30)"
+                ref="wavePath"
+              />
+            </g>
+          </svg>
         </div>
       )
     } else {
@@ -25,7 +34,7 @@ class LoadedClipWave extends React.Component {
           <h3>{this.props.clip.title} | {this.props.clip.artist !== "" ? this.props.clip.artist : "Unknown"}</h3>
           <button onClick={this.props.playClip}> ▶ </button><button onClick={this.props.stopClip}> ◼ </button>
           <button onClick={this.props.editSongSelection}>Edit Song</button>
-            <svg width="800" height="200">
+            <svg width="760" height="200" id="waveform">
               <g id="waveShape" ref="waveGroup">
                 <path
                   className="wave"
@@ -40,8 +49,6 @@ class LoadedClipWave extends React.Component {
   }
 
   render () {
-    console.log(this.refs.wavePath)
-    console.log(this.props.waveData)
     return (
       this.whatToRender()
     )

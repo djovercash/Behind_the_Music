@@ -15,8 +15,8 @@ class LoadedClipSpectral extends React.Component {
     .range([this.height - 55, 50]);
 
   colors = d3.scaleLinear()
-    .domain([0, 100])
-    .range(['white', 'red']);
+    .domain([0, 50])
+    .range(['blue', 'red']);
 
   componentDidMount() {
     this.canvas = this.refs.spectralCanvas
