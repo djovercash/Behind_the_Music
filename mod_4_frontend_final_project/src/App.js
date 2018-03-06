@@ -139,6 +139,7 @@ class App extends Component {
               <Route path="/signup" render={(routerParams) => {
                 return <Signup handleSignUp={this.createUser} />
               }}/>
+              <Redirect from='/' to='/login' />
             </Switch>
             <h3>{this.state.user_info.message === "User Not Found" ? "There was an error. Please reenter your username and password" : null}</h3>
             <h3>{this.state.user_info.message === "Invalid Information. Please try again" ? "There was an error. Please reender desired username and password" : null}</h3>

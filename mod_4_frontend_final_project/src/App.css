@@ -99,6 +99,24 @@ a {
 
 }
 
+.form {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  width: 100%;
+  height: 100%;
+
+  display: block;
+  justify-content: center;
+  grid-template-columns: 200px 800px;
+  grid-template-rows: 300px auto;
+  grid-gap: 20px 20px;
+}
+
+.form h1{
+  margin-bottom: 0px;
+}
+
 #userClipsList {
   grid-column-start: 1;
   grid-column-end: 2;
