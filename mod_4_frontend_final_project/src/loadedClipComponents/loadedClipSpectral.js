@@ -4,25 +4,25 @@ import * as d3 from 'd3'
 class LoadedClipSpectral extends React.Component {
 
   width = 760
-  height = 300
+  height = 400
 
   x = d3.scaleLinear()
-    .domain([0, 1024])
-    .range([50, this.width - 55]);
+    .domain([0, 512])
+    .range([3, this.width - 256]);
 
   y = d3.scaleLinear()
-    .domain([0, 290])
-    .range([this.height - 0, 0]);
+    .domain([0, 255])
+    .range([this.height - 5, 5]);
 
   colors = d3.scaleLinear()
-    .domain([0, 50])
-    .range(['blue', 'red']);
+    .domain([0, 240])
+    .range(['orange', 'red']);
 
   componentDidMount() {
     this.canvas = this.refs.spectralCanvas
     this.canvasCtx = this.canvas.getContext("2d");
     this.canvasCtx.fillStyle = 'rgb(255, 255, 255)';
-    this.canvasCtx.strokeStyle = 'rgb(40, 40, 40)';
+    this.canvasCtx.strokeStyle = 'rgb(0, 0, 0)';
     this.canvasCtx.lineWidth = .1;
     this.draw()
   }
