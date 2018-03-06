@@ -157,6 +157,48 @@ a {
   text-align: center;
 }
 
+.AudioClip {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 3;
+  justify-content: center;
+  text-align: center;
+}
+
+
+#editForm {
+  color: rgb(255, 165, 0);
+  text-align: center;
+}
+
+#delete {
+  color: rgb(255, 0, 0);
+  width: 200px;
+  height: 32px;
+  font-size: 16px;
+  background-color: rgb(20, 20, 20);
+  border: none;
+}
+
+#editForm input {
+  width: 300px;
+  height: 30px;
+  margin-bottom: 5px;
+  background-color: rgb(20, 20, 20);
+  color: rgb(255, 255, 255);
+  outline: none;
+  font-size: 16px;
+  text-align: center;
+}
+
+#editForm #submit {
+  width: 200px;
+  background-color: rgb(20, 20, 20);
+  border: none;
+  color: rgb(8, 190, 190);
+}
+
 .signupInput {
   display: flex;
   justify-content: center;
@@ -171,7 +213,7 @@ a {
   width: 200px;
   background-color: rgb(20, 20, 20);
   border: none;
-  color: rgb(255, 255, 255);
+  color: rgb(8, 190, 190);
 }
 
 
@@ -204,7 +246,8 @@ a {
   list-style: none;
   text-align: left;
   background-color: rgb(33, 33, 33);
-  color: rgb(180, 180, 180)
+  color: rgb(180, 180, 180);
+  overflow: auto;
 }
 
 #uploadClipButton {

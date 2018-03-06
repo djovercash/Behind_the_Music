@@ -3,7 +3,7 @@ import NavBar from './appComponents/navbar'
 import AudioContainer from './appComponents/audioContainer'
 import Login from './appComponents/login'
 import Signup from './appComponents/signup'
-import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
+import {Route, Switch, Redirect} from 'react-router-dom';
 import './App.css';
 
 const LOGINURL = 'http://localhost:3000/login'

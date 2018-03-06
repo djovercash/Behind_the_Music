@@ -23,13 +23,13 @@ class LoadedClipWave extends React.Component {
         <div className="loadedClipWave" id="clipNotLoaded">
           <h1>Select a Clip</h1>
           <button> ▶ </button><button> ◼ </button>
-          <img id="demoWave" src={OrangeForm} />
+          <img id="demoWave" src={OrangeForm} alt="OrangeForm" />
         </div>
       )
     } else {
       return (
         <div className="loadedClipWave">
-          <h1>{this.props.clip.title} | {this.props.clip.artist !== "" ? this.props.clip.artist : "Unknown"}</h1>
+          <h1>{this.props.clip.title.length > 15 ? this.props.clip.title.substring(0, 15) + "..." : this.props.clip.title} | {this.props.clip.artist !== "" ? this.props.clip.artist : "Unknown"}</h1>
           <button onClick={this.props.playClip}> ▶ </button><button onClick={this.props.stopClip}> ◼ </button>
           <button onClick={this.props.editSongSelection}>Edit Song</button>
             <svg width="760" height="200" id="waveform">
