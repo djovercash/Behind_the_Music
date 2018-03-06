@@ -132,15 +132,13 @@ class App extends Component {
           <NavBar user={this.state.user}/>
           <Switch>
             <Route path="/login" render={(routerParams) => {
-              return <Login handleLogin={this.LogIn}/>
+              return <Login message={this.state.user.message} handleLogin={this.LogIn}/>
             }}/>
             <Route path="/signup" render={(routerParams) => {
-              return <Signup handleSignUp={this.createUser} />
+              return <Signup message={this.state.user.message} handleSignUp={this.createUser} />
             }}/>
             <Redirect from="/" to="/login" />
           </Switch>
-          <h3>{this.state.user.message === "User Not Found" ? "There was an error. Please reenter your username and password" : null}</h3>
-          <h3>{this.state.user.message === "Invalid Information. Please try again" ? "There was an error. Please reender desired username and password" : null}</h3>
         </div>
       )
     }

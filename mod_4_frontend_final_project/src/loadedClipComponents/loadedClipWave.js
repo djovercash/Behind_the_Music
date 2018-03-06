@@ -1,4 +1,5 @@
 import React from 'react'
+import OrangeForm from './orangeform.jpg'
 import * as d3 from 'd3'
 
 class LoadedClipWave extends React.Component {
@@ -7,10 +8,6 @@ class LoadedClipWave extends React.Component {
     'stroke': 'orange',
     'fillOpacity': '0',
   };
-
-  // groupStyle = {
-  //   'margin-top': '-50px'
-  // }
 
   componentDidMount() {
     d3.select(this.refs.wavePath).datum(this.props.waveData).attr("d",this.props.line)
@@ -24,23 +21,15 @@ class LoadedClipWave extends React.Component {
     if (this.props.clip.title === '') {
       return (
         <div className="loadedClipWave" id="clipNotLoaded">
-          <h3>Select a Clip</h3>
+          <h1>Select a Clip</h1>
           <button> ▶ </button><button> ◼ </button>
-          <svg width="760" height="200" id="demoWave" >
-            <g ref="waveGroup">
-              <path
-                className="wave"
-                transform="translate(0,30)"
-                ref="wavePath"
-              />
-            </g>
-          </svg>
+          <img id="demoWave" src={OrangeForm} />
         </div>
       )
     } else {
       return (
         <div className="loadedClipWave">
-          <h3>{this.props.clip.title} | {this.props.clip.artist !== "" ? this.props.clip.artist : "Unknown"}</h3>
+          <h1>{this.props.clip.title} | {this.props.clip.artist !== "" ? this.props.clip.artist : "Unknown"}</h1>
           <button onClick={this.props.playClip}> ▶ </button><button onClick={this.props.stopClip}> ◼ </button>
           <button onClick={this.props.editSongSelection}>Edit Song</button>
             <svg width="760" height="200" id="waveform">

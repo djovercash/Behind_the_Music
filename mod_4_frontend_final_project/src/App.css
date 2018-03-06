@@ -1,5 +1,16 @@
 body {
-  background-color: rgb(33, 33, 33)
+  background-color: rgb(33, 33, 33);
+  font-family: 'Archivo Black', sans-serif;
+  color: rgb(255, 255, 255)
+}
+
+button {
+  background-color: rgb(20, 20, 20);
+  border: none;
+  color: rgb(8, 190, 190);
+  padding: 10px 10px 10px 10px;
+  font-size: 16px;
+  margin: 0px 2.5px 0px 2.5px;
 }
 
 .App {
@@ -29,7 +40,7 @@ body {
 
 a {
   text-decoration: none;
-  color: rgb(255, 255, 255)
+  color: rgb(180, 180, 180)
 }
 
 .AudioClip a {
@@ -63,7 +74,7 @@ a {
   padding-right: 10px;
   justify-content: space-between;
   background-color: rgb(60, 60, 60);
-  color: rgb(255, 255, 255);
+  color: rgb(255, 165, 0);
   width: 100%;
   height: 100%;
   border: 2px solid black;
@@ -84,7 +95,7 @@ a {
   display: flex;
 }
 
-#userLogin h5{
+#userLogin h3{
   margin-left: 5px;
   margin-right: 5px;
 }
@@ -120,18 +131,49 @@ a {
   grid-row-start: 2;
   width: 100%;
   height: 100%;
-
+  color: rgb(255, 165, 0);
   display: block;
   justify-content: center;
   grid-template-columns: 200px 800px;
   grid-template-rows: 300px auto;
   grid-gap: 15px 15px;
   background-color: rgb(60, 60, 60);
+  border: 2px solid black;
+  box-shadow: 2px 2px 3px 0px rgba(0, 0, 0, 0.61);
 }
 
 .form h1{
   margin-bottom: 0px;
 }
+
+.form input {
+  width: 300px;
+  height: 30px;
+  margin-bottom: 5px;
+  background-color: rgb(20, 20, 20);
+  color: rgb(255, 255, 255);
+  outline: none;
+  font-size: 16px;
+  text-align: center;
+}
+
+.signupInput {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.signupInput h3 {
+  margin-right: 10px;
+}
+
+#submit {
+  width: 200px;
+  background-color: rgb(20, 20, 20);
+  border: none;
+  color: rgb(255, 255, 255);
+}
+
 
 #userClipsList {
   grid-column-start: 1;
@@ -143,11 +185,26 @@ a {
   height: 100%;
 
   font-size: 11pt;
-  text-align: left;
-
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: rgb(255, 165, 0);
   border: 2px solid black;
   box-shadow: 2px 2px 3px 0px rgba(0, 0, 0, 0.61);
   background-color: rgb(60, 60, 60);
+}
+
+#clipList {
+  padding: 10px 10px;
+  margin: -10px 5px 10px 5px;
+  font-family: "VT323", monospace;
+  font-size: 20px;
+  height: 75%;
+  list-style: none;
+  text-align: left;
+  background-color: rgb(33, 33, 33);
+  color: rgb(180, 180, 180)
 }
 
 #uploadClipButton {
@@ -193,6 +250,13 @@ a {
   margin-bottom: 10px;
 }
 
+.loadedClipWave h1 {
+  color: rgb(180, 180, 180);
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+
 #spectralCanvas {
   grid-column-start: 1;
   grid-column-end: 3;
@@ -202,6 +266,7 @@ a {
   border: 1px solid black;
   /* box-shadow: 4px 4px 0px 0px black; */
 }
+
 
 #clipName {
   grid-column-start: 1;
@@ -233,10 +298,10 @@ a {
   width: 760px;
   height: 200px;
   border: 2px solid rgb(0, 0, 0);
-  background-image: linear-gradient(to bottom, rgba(255,255,255,0.6) 50%,rgba(255,255,255,0.6) 50%), url('http://www.ni.com/cms/images/devzone/tut/Arbitrary_Waveform_1.jpg');
+  /* background-image: linear-gradient(to bottom, rgba(255,255,255,0.6) 50%,rgba(255,255,255,0.6) 50%), url('../orangeform.jpg');
   background-repeat: no-repeat;
   background-size: contain;
-  background-position: center;
+  background-position: center; */
 }
 
 

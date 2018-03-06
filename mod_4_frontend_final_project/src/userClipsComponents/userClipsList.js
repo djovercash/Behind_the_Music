@@ -6,14 +6,12 @@ const UserClipsList = (props) => {
   return (
     <div id="userClipsList">
       <h3>Your Current Clips</h3>
-      {audioClips.map(clip => {
-        return (
-          <div key={clip.id}>
-            <UserClipItem clip={clip} findAudioFile={props.findAudioFile}/>
-          </div>
-        )
-      })}
-      <button onClick={props.uploadClip}>Upload Audio Clip</button>
+      <div id="clipList">
+        {audioClips.map(clip => {
+          return <UserClipItem clip={clip} key={clip.id} findAudioFile={props.findAudioFile}/>
+        })}
+      </div>
+      <button style={{"bottom": 0}} onClick={props.uploadClip}>Upload Audio Clip</button>
     </div>
   )
 }

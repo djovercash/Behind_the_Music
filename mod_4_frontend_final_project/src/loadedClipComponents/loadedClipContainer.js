@@ -2,6 +2,7 @@ import React from 'react'
 import LoadedClipWave from './loadedClipWave'
 import LoadedClipSpectral from './loadedClipSpectral'
 import LoadedClipEdit from './loadedClipEdit'
+import LoadedClipCircle from './loadedClipCircle'
 import * as d3 from 'd3'
 
 class LoadedClipContainer extends React.Component {
@@ -9,7 +10,8 @@ class LoadedClipContainer extends React.Component {
   state = {
     waveData: null,
     line: null,
-    decodedData: null
+    decodedData: null,
+    display: true
   }
 
   componentWillMount() {
@@ -46,10 +48,16 @@ class LoadedClipContainer extends React.Component {
     this.analyser.connect(this.audioCtx.destination);
     this.source.buffer = this.state.decodedData
     this.source.start(0);
+    this.setState({
+      display: false
+    })
   }
 
   stopClip = (event) => {
     this.source.stop();
+    this.setState({
+      display: true
+    })
   }
 
 
@@ -71,11 +79,18 @@ class LoadedClipContainer extends React.Component {
   }
 
   whatToRender() {
-    if (!this.props.edit_song) {
+    if (!this.props.edit_song && !this.state.display) {
       return (
         <div id="loadedClipContainer">
           <LoadedClipWave {...this.state} clip={this.props.clip} playClip={this.playClip} stopClip={this.stopClip} editSongSelection={this.props.editSongSelection}/>
-          <LoadedClipSpectral {...this.state} clip={this.props.clip} analyser={this.analyser} dataArray={this.dataArray}/>
+          <LoadedClipSpectral {...this.state} visible={this.state.display} clip={this.props.clip} analyser={this.analyser} dataArray={this.dataArray}/>
+        </div>
+      )
+    } else if (!this.props.edit_song && this.state.display) {
+      return (
+        <div id="loadedClipContainer">
+          <LoadedClipWave {...this.state} clip={this.props.clip} playClip={this.playClip} stopClip={this.stopClip} editSongSelection={this.props.editSongSelection}/>
+          <LoadedClipCircle />
         </div>
       )
     } else {

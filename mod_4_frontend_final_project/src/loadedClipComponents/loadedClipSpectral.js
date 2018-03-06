@@ -2,6 +2,7 @@ import React from 'react'
 import * as d3 from 'd3'
 
 class LoadedClipSpectral extends React.Component {
+
   width = 760
   height = 400
 
@@ -44,10 +45,10 @@ class LoadedClipSpectral extends React.Component {
     requestAnimationFrame(this.draw);
   }
 
+
   render () {
     return (
-
-        <canvas ref="spectralCanvas" id="spectralCanvas" width={this.width} height={this.height} ></canvas>
+      <canvas ref="spectralCanvas" id="spectralCanvas" width={this.width} height={this.height} ></canvas>
     )
   }
 }
