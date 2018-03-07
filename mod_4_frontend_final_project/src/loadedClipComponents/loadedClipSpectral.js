@@ -7,8 +7,8 @@ class LoadedClipSpectral extends React.Component {
   height = 360
 
   x = d3.scaleLinear()
-    .domain([0, 512])
-    .range([3, this.width - 256]);
+    .domain([0, 1024])
+    .range([3, this.width - 0]);
 
   y = d3.scaleLinear()
     .domain([0, 255])
