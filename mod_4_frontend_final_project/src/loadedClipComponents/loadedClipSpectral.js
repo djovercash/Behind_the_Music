@@ -15,7 +15,7 @@ class LoadedClipSpectral extends React.Component {
     .range([this.height + 4, 5]);
 
   colors = d3.scaleLinear()
-    .domain([0, 25, 75, 140, 220])
+    .domain([0, 40, 90, 140, 220])
     .range(['white', 'yellow', 'orange', 'orange', 'red']);
 
   componentDidMount() {
