@@ -99,7 +99,6 @@ class App extends Component {
     return fetch(`${USERSURL}/${id}`).then(res => res.json())
   }
 
-
   componentDidMount() {
     if (localStorage["user_id"]) {
       let id = parseInt(localStorage.user_id)
@@ -116,11 +115,10 @@ class App extends Component {
     if (this.state.user.username) {
       return (
         <div className="LoggedIn">
-          <NavBar Home={this.Home} Logout={this.LogOut} user={this.state.user}/>
+          <NavBar Logout={this.LogOut} user={this.state.user}/>
           <Switch>
             <Route path="/users/:id" render={(routerParams) => {
-              console.log(routerParams.match.params.id)
-              return <AudioContainer clips={this.state.user.clips} user={this.state.user.id}/>
+              return <AudioContainer ref="audioContainer" clips={this.state.user.clips} user={this.state.user.id}/>
             }}/>
             <Redirect from="/" to="/users/:id" />
           </Switch>

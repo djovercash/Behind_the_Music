@@ -73,7 +73,6 @@ class AudioContainer extends React.Component {
       })
     }
 
-
   editSongSelection = (event) => {
     event.preventDefault()
     if (this.refs.loadedClip.source) {
@@ -81,6 +80,13 @@ class AudioContainer extends React.Component {
     }
     this.setState({
         edit_song: true
+    })
+  }
+
+  endEdit = (event) => {
+    event.preventDefault()
+    this.setState({
+      edit_song: false
     })
   }
 
@@ -195,7 +201,7 @@ class AudioContainer extends React.Component {
     return (
       <div id="audioContainer">
         <UserClipsList clips={this.state.clips} sortAscClips={this.sortAscClips} sortDescClips={this.sortDescClips} findAudioFile={this.findAudioFile} uploadClip={this.uploadClip}/>
-        <LoadedClipContainer ref="loadedClip" updateClip={this.updateClip} updateTitle={this.updateTitle} updateArtist={this.updateArtist} stopEdit={this.stopEdit} deleteClip={this.deleteClip} clip={this.state.loaded_clip} edit_song={this.state.edit_song} editSongSelection={this.editSongSelection}/>
+        <LoadedClipContainer ref="loadedClip" updateClip={this.updateClip} endEdit={this.endEdit} updateTitle={this.updateTitle} updateArtist={this.updateArtist} stopEdit={this.stopEdit} deleteClip={this.deleteClip} clip={this.state.loaded_clip} edit_song={this.state.edit_song} editSongSelection={this.editSongSelection}/>
       </div>
     )
   }

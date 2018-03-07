@@ -16,6 +16,8 @@ const LoadedClipEdit = (props) => {
         <br/ >
         <input id="submit" type="submit" value="Submit" />
       </form>
+      <input id="edit" type="submit" onClick={props.endEdit} value="Go Back"/>
+      <br />
       <input id="delete" type="submit" onClick={props.deleteClip} value="Delete Clip"/>
     </div>
   )

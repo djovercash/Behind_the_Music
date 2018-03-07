@@ -16,7 +16,7 @@ const userExists = (props) => {
   if (props.user.username) {
     return (
       <div id="userLogin">
-        <h3 onClick={props.Home}><NavLink to="/users/:id" exact>Good {setTimeOfDay(time)}, {props.user.username}</NavLink></h3>
+        <h3><NavLink to="/users/:id" exact>Good {setTimeOfDay(time)}, {props.user.username}</NavLink></h3>
         <h3>|</h3>
         <h3 onClick={props.Logout}><NavLink to='/login' exact>Logout</NavLink></h3>
       </div>

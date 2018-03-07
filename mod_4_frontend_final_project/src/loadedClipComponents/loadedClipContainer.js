@@ -96,7 +96,7 @@ class LoadedClipContainer extends React.Component {
     } else {
       return (
         <div id="loadedClipContainer">
-          <LoadedClipEdit clip={this.props.clip} updateClip={this.props.updateClip} updateTitle={this.props.updateTitle} updateArtist={this.props.updateArtist} deleteClip={this.props.deleteClip}/>
+          <LoadedClipEdit clip={this.props.clip} updateClip={this.props.updateClip} endEdit={this.props.endEdit} updateTitle={this.props.updateTitle} updateArtist={this.props.updateArtist} deleteClip={this.props.deleteClip}/>
         </div>
       )
     }
