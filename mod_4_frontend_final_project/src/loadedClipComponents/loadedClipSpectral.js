@@ -4,7 +4,7 @@ import * as d3 from 'd3'
 class LoadedClipSpectral extends React.Component {
 
   width = 760
-  height = 400
+  height = 360
 
   x = d3.scaleLinear()
     .domain([0, 512])

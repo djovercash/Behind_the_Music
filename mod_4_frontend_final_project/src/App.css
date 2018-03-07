@@ -7,6 +7,7 @@ body {
 button {
   background-color: rgb(20, 20, 20);
   border: none;
+  outline: none;
   color: rgb(8, 190, 190);
   padding: 10px 10px 10px 10px;
   font-size: 16px;
@@ -274,7 +275,7 @@ a {
   display: grid;
   justify-items: center;
   grid-template-columns: 50% 50%;
-  grid-template-rows: 300px 408px auto;
+  grid-template-rows: 300px 368px auto;
   grid-gap: 10px 0px;
   background-color: rgb(60, 60, 60);
   border: 2px solid black;
@@ -310,7 +311,10 @@ a {
   grid-column-end: 3;
   grid-row-start: 2;
   /* grid-row-end: 3; */
+  width: 95%;
+  height: 100%;
 
+  background-color: rgb(33, 33, 33);
   border: 1px solid black;
   /* box-shadow: 4px 4px 0px 0px black; */
 }
