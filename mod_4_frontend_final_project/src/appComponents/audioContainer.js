@@ -16,7 +16,7 @@ class AudioContainer extends React.Component {
       artist: '',
       handle: ''
     },
-    edit_song: false
+    edit_song: false,
   }
 
   componentDidMount() {
@@ -155,10 +155,46 @@ class AudioContainer extends React.Component {
     })
   }
 
+  sortAscClips = (event) => {
+    let clips = this.state.clips
+    clips.sort(function(a, b) {
+      var titleA = a.title.toUpperCase(); // ignore upper and lowercase
+      var titleB = b.title.toUpperCase(); // ignore upper and lowercase
+      if (titleA < titleB) {
+        return -1;
+      }
+      if (titleA > titleB) {
+        return 1;
+      }
+      return 0;
+    })
+    this.setState({
+      clips: [...clips]
+    })
+  }
+
+  sortDescClips = (event) => {
+    let clips = this.state.clips
+    clips.sort(function(a, b) {
+      var titleA = a.title.toUpperCase(); // ignore upper and lowercase
+      var titleB = b.title.toUpperCase(); // ignore upper and lowercase
+      if (titleA > titleB) {
+        return -1;
+      }
+      if (titleA < titleB) {
+        return 1;
+      }
+      return 0;
+    })
+    this.setState({
+      clips: [...clips]
+    })
+  }
+
   render() {
     return (
       <div id="audioContainer">
-        <UserClipsList clips={this.state.clips} findAudioFile={this.findAudioFile} uploadClip={this.uploadClip}/>
+        <UserClipsList clips={this.state.clips} sortAscClips={this.sortAscClips} sortDescClips={this.sortDescClips} findAudioFile={this.findAudioFile} uploadClip={this.uploadClip}/>
         <LoadedClipContainer ref="loadedClip" updateClip={this.updateClip} updateTitle={this.updateTitle} updateArtist={this.updateArtist} stopEdit={this.stopEdit} deleteClip={this.deleteClip} clip={this.state.loaded_clip} edit_song={this.state.edit_song} editSongSelection={this.editSongSelection}/>
       </div>
     )
