@@ -4,6 +4,7 @@ import LoadedClipContainer from '../loadedClipComponents/loadedClipContainer'
 import filestack from 'filestack-js';
 
 const BASEURL = 'http://localhost:3000/clips'
+const API_KEY = //You need an API KEY from Filestack
 
 class AudioContainer extends React.Component {
 
@@ -59,7 +60,7 @@ class AudioContainer extends React.Component {
   }
 
     uploadClip = (event) => {
-      const client = filestack.init('AO1rF1TdISrSzbwTPEHFez')
+      const client = filestack.init(API_KEY)
       client.pick({}).then(res => {
         let files = res.filesUploaded
         files.forEach(file => {
