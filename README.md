@@ -10,3 +10,6 @@ In development, we used D3.js to create waveforms and spectral analysis, Filesta
 - There is plenty of refactoring to be done in order to make cleaner and clearer code.
 - Need to incorporate JWT in order to use tokens for user Authentication.
 - Would like to build out more D3 for the various audio clips.
+
+# Video Demo
+Click <a href="https://www.youtube.com/watch?v=O6GFSxxUyp4&feature=youtu.be" target="_blank">here</a> for a video demo of Behind the Music.
